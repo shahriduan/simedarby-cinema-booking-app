@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'first_name' => 'Alex Goh',
             'last_name' => 'Kean Tiong'
         ], [
-            'email' => 'alex.goh.keantiong@gmail.com',
+            'email' => 'alex@gmail.com',
             'password' => 'alex@2'
         ]);
     }

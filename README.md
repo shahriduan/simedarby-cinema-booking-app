@@ -26,30 +26,34 @@ DB_PASSWORD=your_database_password
 
 # <font color="#89CFF0">Important Notes You Should Know</font>
 
-### 🚀 Things that I hardcoded, that not use API
-- List movie reviews
-- List available showtime
-- List cinema hall layout and seats
-- List movie and seats price all are same
-- List of Food and beverages
-- List of Promo code
+### ⚙️ API Scope & Static Data
 
-API that I develop only cover main booking flow only
+The backend APIs developed for this project strictly cover the primary booking flow. To meet the assessment timeline, the following supporting data sets are currently static/hardcoded:
+- Movie reviews
+- Available showtimes
+- Cinema hall layouts and seat maps
+- Movie & seat pricing (uniform pricing across all sheets)
+- Food and beverage menus
+- Promo code listings
 
-### 🚀 Feature that not cover in this booking app
+### 🎯 Out of Scope & Future Enhancements
 
-- Favourite or bookmark list movie
-- Profile
-- Write a movie rating & reviews
-- Bank transfer and crypto wallets payment
-- View ticket barcode
-- List of user booked movie
-- Movie category for example new release, popular in cinema and recommended for you.
-- New user registration
-- Email notification
+This implementation focuses purely on the primary booking flow and core wireframes. To keep the core engine clean, the following features were excluded from this version:
+- User registration & profiles
+- Movie categories (New Release, Popular, Recommended)
+- Movie ratings, reviews, and favorites/bookmarks
+- User booking history & ticket barcodes
+- Bank transfer & crypto wallet payments
+- Email notifications
 
-I do feature based on main booking flow and wireframe only
+### 🏷️ Promo code (Testing)
 
-### 🚀 Promo code
+A static promo code is available to test the discount logic during the checkout flow:
+- Code: PROMO5
+- Benefit: RM5.00 flat discount
 
-You can use promo code PROMO5 to get RM5 discount
+
+### 📖 API documentation
+
+Detailed API documentation is automatically generated using Laravel Scribe. You can access the interactive docs directly through your browser at: <br>
+`http://<yourIpAddress>/apidocs`

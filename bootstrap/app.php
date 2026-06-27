@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\ExceptionHandlerHelper;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,7 +18,17 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $responseTrait = new ExceptionHandlerHelper;
+        
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );
+
+        $exceptions->render(function (AuthenticationException $e, Request $request) use ($responseTrait) {
+            if ($request->expectsJson()) {
+                return $responseTrait->responseUnauthorized(__('auth.unauthenticated'));
+            } else {
+                return redirect()->guest($e->redirectTo($request) ?? route('login'));
+            }
+        });
     })->create();

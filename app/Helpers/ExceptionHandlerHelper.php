@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Helpers;
 
 use App\Traits\ResponseTrait;
 
-abstract class Controller
+class ExceptionHandlerHelper
 {
     use ResponseTrait;
 }
