@@ -75,6 +75,16 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-booking" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="booking">
+                    <a href="#booking">Booking</a>
+                </li>
+                                    <ul id="tocify-subheader-booking" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-ticket">
+                                <a href="#booking-POSTapi-booking-ticket">Book Ticket</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-cinema" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="cinema">
                     <a href="#cinema">Cinema</a>
@@ -85,6 +95,16 @@
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="cinema-GETapi-cinemas">
                                 <a href="#cinema-GETapi-cinemas">List Cinemas</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-food-and-beverages" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="food-and-beverages">
+                    <a href="#food-and-beverages">Food and Beverages</a>
+                </li>
+                                    <ul id="tocify-subheader-food-and-beverages" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="food-and-beverages-GETapi-fnb-menu">
+                                <a href="#food-and-beverages-GETapi-fnb-menu">FnB Menu</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -380,13 +400,12 @@ response.json()</code></pre></div>
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: true,
     &quot;message&quot;: &quot;OK&quot;,
-    &quot;data&quot;: [
-        {
-            &quot;first_name&quot;: &quot;Najmuddin&quot;,
-            &quot;last_name&quot;: &quot;Razali&quot;,
-            &quot;email&quot;: &quot;najmuddin@gmail.com&quot;
-        }
-    ]
+    &quot;data&quot;: {
+        &quot;id&quot;: 2,
+        &quot;first_name&quot;: &quot;Alex Goh&quot;,
+        &quot;last_name&quot;: &quot;Kean Tiong&quot;,
+        &quot;email&quot;: &quot;alex@gmail.com&quot;
+    }
 }</code>
  </pre>
     </span>
@@ -457,6 +476,260 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                <h1 id="booking">Booking</h1>
+
+    
+
+                                <h2 id="booking-POSTapi-booking-ticket">Book Ticket</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-booking-ticket">
+<blockquote>Example request:</blockquote>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/booking/ticket';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'cinema_id' =&gt; 1,
+            'movie_id' =&gt; 2,
+            'showtime_slot' =&gt; '2026-06-07 09:20:00',
+            'seats' =&gt; [
+                'F4',
+                'F5',
+                'F6',
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/booking/ticket"
+);
+
+const headers = {
+    "Authorization": "Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "cinema_id": 1,
+    "movie_id": 2,
+    "showtime_slot": "2026-06-07 09:20:00",
+    "seats": [
+        "F4",
+        "F5",
+        "F6"
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://127.0.0.1:8000/api/booking/ticket'
+payload = {
+    "cinema_id": 1,
+    "movie_id": 2,
+    "showtime_slot": "2026-06-07 09:20:00",
+    "seats": [
+        "F4",
+        "F5",
+        "F6"
+    ]
+}
+headers = {
+  'Authorization': 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-booking-ticket">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;message&quot;: &quot;OK&quot;,
+    &quot;data&quot;: {
+        &quot;booking&quot;: {
+            &quot;booking_number&quot;: &quot;B260627143845&quot;,
+            &quot;user&quot;: {
+                &quot;id&quot;: 2,
+                &quot;first_name&quot;: &quot;Alex Goh&quot;,
+                &quot;last_name&quot;: &quot;Kean Tiong&quot;,
+                &quot;email&quot;: &quot;alex@gmail.com&quot;
+            },
+            &quot;cinema_id&quot;: 1,
+            &quot;movie_id&quot;: 3,
+            &quot;movie_start_at&quot;: &quot;2026-06-28 09:20:00&quot;,
+            &quot;movie_end_at&quot;: &quot;2026-06-28 11:22:00&quot;,
+            &quot;total_selected_seat&quot;: 2,
+            &quot;promo_code&quot;: null,
+            &quot;total_ticket_price&quot;: &quot;30.00&quot;,
+            &quot;fnb_total_price&quot;: &quot;0.00&quot;,
+            &quot;service_charges&quot;: &quot;0.30&quot;,
+            &quot;discount_price&quot;: &quot;0.00&quot;,
+            &quot;grand_total_price&quot;: &quot;30.30&quot;,
+            &quot;booking_status&quot;: &quot;Cart&quot;,
+            &quot;cart_expired_at&quot;: &quot;2026-06-27 14:48:45&quot;
+        },
+        &quot;seat_lock_period&quot;: 10
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-booking-ticket" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-booking-ticket"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-booking-ticket"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-booking-ticket" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-booking-ticket">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-booking-ticket" data-method="POST"
+      data-path="api/booking/ticket"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-booking-ticket', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/booking/ticket</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-booking-ticket"
+               value="Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-booking-ticket"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-booking-ticket"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cinema_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cinema_id"                data-endpoint="POSTapi-booking-ticket"
+               value="1"
+               data-component="body">
+    <br>
+<p>Cinema ID. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>movie_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="movie_id"                data-endpoint="POSTapi-booking-ticket"
+               value="2"
+               data-component="body">
+    <br>
+<p>Movie ID. Example: <code>2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>showtime_slot</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="showtime_slot"                data-endpoint="POSTapi-booking-ticket"
+               value="2026-06-07 09:20:00"
+               data-component="body">
+    <br>
+<p>Slot datetime. Example: <code>2026-06-07 09:20:00</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>seats</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="seats[0]"                data-endpoint="POSTapi-booking-ticket"
+               data-component="body">
+        <input type="text" style="display: none"
+               name="seats[1]"                data-endpoint="POSTapi-booking-ticket"
+               data-component="body">
+    <br>
+<p>Selected seats.</p>
+        </div>
+        </form>
 
                 <h1 id="cinema">Cinema</h1>
 
@@ -762,6 +1035,165 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Area ID. Example: <code>1</code></p>
             </div>
                 </form>
+
+                <h1 id="food-and-beverages">Food and Beverages</h1>
+
+    
+
+                                <h2 id="food-and-beverages-GETapi-fnb-menu">FnB Menu</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>List of food and beverages with category</p>
+
+<span id="example-requests-GETapi-fnb-menu">
+<blockquote>Example request:</blockquote>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/fnb/menu';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/fnb/menu"
+);
+
+const headers = {
+    "Authorization": "Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://127.0.0.1:8000/api/fnb/menu'
+headers = {
+  'Authorization': 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-fnb-menu">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;message&quot;: &quot;OK&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;category&quot;: &quot;Combo&quot;,
+            &quot;items&quot;: [
+                {
+                    &quot;name&quot;: &quot;Tasty Combo&quot;,
+                    &quot;description&quot;: &quot;2 Shawarma, Pack of fries &amp; Pepsi&quot;,
+                    &quot;unit_price&quot;: 28
+                }
+            ]
+        },
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-fnb-menu" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-fnb-menu"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-fnb-menu"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-fnb-menu" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-fnb-menu">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-fnb-menu" data-method="GET"
+      data-path="api/fnb/menu"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-fnb-menu', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/fnb/menu</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-fnb-menu"
+               value="Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-fnb-menu"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-fnb-menu"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
 
                 <h1 id="movies">Movies</h1>
 

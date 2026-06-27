@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CinemaController;
+use App\Http\Controllers\FnbController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,11 @@ Route::get('cinemas', [CinemaController::class, 'listCinemas']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('user', [AuthController::class, 'getUser']);
+
+    # Food and Beverages
+    Route::prefix('fnb')->group(function () {
+        Route::get('menu', [FnbController::class, 'fnbMenu']);
+    });
 
     # Booking
     Route::prefix('booking')->group(function () {
