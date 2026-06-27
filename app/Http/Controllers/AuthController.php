@@ -75,19 +75,16 @@ class AuthController extends Controller
      * @response {
      *     "status": true,
      *     "message": "OK",
-     *     "data": [
-     *         {
-     *             "first_name": "Najmuddin",
-     *             "last_name": "Razali",
-     *             "email": "najmuddin@gmail.com"
-     *         }
-     *     ]
+     *     "data": {
+     *         "id": 2,
+     *         "first_name": "Alex Goh",
+     *         "last_name": "Kean Tiong",
+     *         "email": "alex@gmail.com"
+     *     }
      * }
      */
     public function getUser(Request $request)
     {
-        return $this->responseSuccess('OK', [
-            new UserResource($request->user())
-        ]);
+        return $this->responseSuccess('OK', new UserResource($request->user()));
     }
 }

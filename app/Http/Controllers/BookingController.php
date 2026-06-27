@@ -1,0 +1,136 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Resources\BookingResource;
+use App\Models\Booking;
+use App\Models\BookingSeat;
+use App\Models\Movie;
+use Carbon\Carbon;
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+/**
+ * @group   Booking
+ * 
+ * @authenticated
+ */
+class BookingController extends Controller
+{
+    /**
+     * Book Ticket
+     * 
+     * @bodyParam   cinema_id       integer     required    Cinema ID. Example: 1
+     * @bodyParam   movie_id        integer     required    Movie ID. Example: 2
+     * @bodyParam   showtime_slot   string      required    Slot datetime. Example: 2026-06-07 09:20:00
+     * @bodyparam   seats           string[]    required    Selected seats. Example: ["F4", "F5", "F6"]
+     * 
+     * @response {
+     *     "status": true,
+     *     "message": "OK",
+     *     "data": {
+     *         "booking": {
+     *             "booking_number": "B260627143845",
+     *             "user": {
+     *                 "id": 2,
+     *                 "first_name": "Alex Goh",
+     *                 "last_name": "Kean Tiong",
+     *                 "email": "alex@gmail.com"
+     *             },
+     *             "cinema_id": 1,
+     *             "movie_id": 3,
+     *             "movie_start_at": "2026-06-28 09:20:00",
+     *             "movie_end_at": "2026-06-28 11:22:00",
+     *             "total_selected_seat": 2,
+     *             "promo_code": null,
+     *             "total_ticket_price": "30.00",
+     *             "fnb_total_price": "0.00",
+     *             "service_charges": "0.30",
+     *             "discount_price": "0.00",
+     *             "grand_total_price": "30.30",
+     *             "booking_status": "Cart",
+     *             "cart_expired_at": "2026-06-27 14:48:45"
+     *         },
+     *         "seat_lock_period": 10
+     *     }
+     * }
+     */
+    public function bookingTicket(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'cinema_id' => 'required|exists:App\Models\Cinema,id',
+            'movie_id' => 'required|exists:App\Models\Movie,id',
+            'showtime_slot' => [
+                'required',
+                'date_format:Y-m-d H:i:s'
+            ],
+            'seats' => [
+                'required',
+                'array',
+                function (string $attribute, mixed $value, Closure $fail) use ($request) {
+                    $cinemaId = $request->cinema_id;
+                    $movieId = $request->movie_id;
+                    $showtimeSlot = $request->showtime_slot;
+
+                    $takenSeats = BookingSeat::whereIn('seat', $value)
+                        ->whereHas('booking', function ($query) use ($cinemaId, $movieId, $showtimeSlot) {
+                            $query->where('cinema_id', $cinemaId)
+                                  ->where('movie_id', $movieId)
+                                  ->where('movie_start_at', $showtimeSlot)
+                                  ->where(function ($statusQuery) {
+                                    $statusQuery->where('booking_status', Booking::STATUS_PAID)
+                                                ->orWhere(function ($cartQuery) {
+                                                    $cartQuery->where('booking_status', Booking::STATUS_CART)
+                                                              ->where('cart_expired_at', '>', now());
+                                                });
+                                  });
+                        })
+                        ->pluck('seat')
+                        ->toArray();
+
+                    if (!empty($takenSeats)) {
+                        $takenSeatsString = implode(', ', $takenSeats);
+                        $fail("The following seats are unavailable: {$takenSeatsString}.");
+                    }
+                },
+            ]
+        ], [], [
+            'cinema_id' => 'cinema',
+            'movie_id' => 'movie',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseError($validator->errors()->first(), $validator->errors());
+        }
+
+        $movie = Movie::find($request->movie_id);
+
+        $booking = new Booking;
+        $booking->booking_number = Booking::generateBookingNumber();
+        $booking->user_id = $request->user()->id;
+        $booking->cinema_id = $request->cinema_id;
+        $booking->movie_id = $request->movie_id;
+        $booking->movie_start_at = $request->showtime_slot;
+        $booking->movie_end_at = Carbon::parse($request->showtime_slot)->addMinutes($movie->duration_minutes);
+        $booking->total_selected_seat = count($request->seats);
+        $booking->cart_expired_at = now()->addMinutes(Booking::SEAT_LOCK_PERIOD);
+        $booking->save();
+
+        foreach ($request->seats as $seat) {
+            $booking->bookingSeats()->create([
+                'seat' => $seat,
+                'price' => Booking::TICKET_PRICE
+            ]);
+        }
+
+        $booking->updateGrandTotalPrice();
+
+        $booking->refresh();
+
+        return $this->responseSuccess('OK', [
+            'booking' => new BookingResource($booking),
+            'seat_lock_period' => Booking::SEAT_LOCK_PERIOD
+        ]);
+    }
+}

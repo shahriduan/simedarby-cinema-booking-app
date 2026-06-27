@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('booking_number')->unique();
+            $table->string('booking_number')->nullable()->index();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('cinema_id')->constrained();
             $table->foreignId('movie_id')->constrained();
-            $table->timestamp('movie_start_at');
-            $table->timestamp('movie_end_at');
+            $table->timestamp('movie_start_at')->nullable();
+            $table->timestamp('movie_end_at')->nullable();
             $table->integer('total_selected_seat')->default(1);
             $table->string('promo_code')->nullable();
+            $table->decimal('total_ticket_price')->default(0);
+            $table->decimal('fnb_total_price')->default(0);
             $table->decimal('service_charges')->default(0);
             $table->decimal('discount_price')->default(0);
             $table->decimal('grand_total_price')->default(0);

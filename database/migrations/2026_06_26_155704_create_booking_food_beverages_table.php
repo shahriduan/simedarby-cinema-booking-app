@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('booking_food_beverages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_id')->constrained();
+            $table->foreignId('fnb_id')->nullable()->index();
             $table->string('name');
             $table->string('description');
             $table->string('category')->index();
