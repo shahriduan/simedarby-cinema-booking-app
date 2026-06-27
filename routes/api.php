@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     # Booking
     Route::prefix('booking')->group(function () {
+        Route::get('details/{booking}', [BookingController::class, 'bookingDetails']);
         Route::post('ticket', [BookingController::class, 'bookingTicket']);
         Route::post('fnb/{booking}', [BookingController::class, 'bookingFnb']);
     });

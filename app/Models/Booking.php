@@ -23,6 +23,7 @@ class Booking extends Model
         'discount_price' => 'decimal:2',
         'grand_total_price' => 'decimal:2'
     ];
+    
     /*
     |--------------------------------------------------------------------------
     | Relationships
@@ -36,6 +37,16 @@ class Booking extends Model
     public function bookingFoodBeverages()
     {
         return $this->hasMany(BookingFoodBeverage::class);
+    }
+
+    public function cinema()
+    {
+        return $this->belongsTo(Cinema::class);
+    }
+
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class);
     }
 
     /*

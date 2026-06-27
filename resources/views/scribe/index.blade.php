@@ -80,7 +80,10 @@
                     <a href="#booking">Booking</a>
                 </li>
                                     <ul id="tocify-subheader-booking" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-ticket">
+                                                    <li class="tocify-item level-2" data-unique="booking-GETapi-booking-details--booking_id-">
+                                <a href="#booking-GETapi-booking-details--booking_id-">Booking Details</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-ticket">
                                 <a href="#booking-POSTapi-booking-ticket">Book Ticket</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-fnb--booking_id-">
@@ -484,7 +487,214 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     
 
-                                <h2 id="booking-POSTapi-booking-ticket">Book Ticket</h2>
+                                <h2 id="booking-GETapi-booking-details--booking_id-">Booking Details</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-booking-details--booking_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/booking/details/1';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/booking/details/1"
+);
+
+const headers = {
+    "Authorization": "Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://127.0.0.1:8000/api/booking/details/1'
+headers = {
+  'Authorization': 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-booking-details--booking_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;message&quot;: &quot;OK&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;booking_number&quot;: &quot;B260627153315&quot;,
+        &quot;user&quot;: {
+            &quot;id&quot;: 2,
+            &quot;first_name&quot;: &quot;Alex Goh&quot;,
+            &quot;last_name&quot;: &quot;Kean Tiong&quot;,
+            &quot;email&quot;: &quot;alex@gmail.com&quot;
+        },
+        &quot;cinema&quot;: {
+            &quot;name&quot;: &quot;GSC - IOI City Mall&quot;,
+            &quot;area&quot;: &quot;Putrajaya&quot;
+        },
+        &quot;movie&quot;: {
+            &quot;id&quot;: 3,
+            &quot;title&quot;: &quot;The Death Of Robin Hood&quot;,
+            &quot;release_date&quot;: &quot;2026-06-18&quot;,
+            &quot;classification&quot;: &quot;16&quot;,
+            &quot;rating&quot;: &quot;3.2&quot;,
+            &quot;total_rating_people&quot;: 26,
+            &quot;genre&quot;: [
+                &quot;Action&quot;
+            ],
+            &quot;synopsis&quot;: &quot;Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.&quot;,
+            &quot;director&quot;: &quot;Michael Sarnoski&quot;,
+            &quot;writers&quot;: &quot;Michael Sarnoski&quot;,
+            &quot;poster_url&quot;: &quot;https://poster.gsc.com.my/2026/260605_TheDeathOfTheRobinhood_big.jpg&quot;,
+            &quot;trailer_url&quot;: &quot;https://youtu.be/goLcYMt7pfg?si=M9HZHLWNijcHvbOz&quot;
+        },
+        &quot;movie_start_at&quot;: &quot;2026-06-28 09:20:00&quot;,
+        &quot;movie_end_at&quot;: &quot;2026-06-28 11:22:00&quot;,
+        &quot;total_selected_seat&quot;: 2,
+        &quot;promo_code&quot;: null,
+        &quot;total_ticket_price&quot;: &quot;30.00&quot;,
+        &quot;fnb_total_price&quot;: &quot;28.00&quot;,
+        &quot;service_charges&quot;: &quot;0.30&quot;,
+        &quot;discount_price&quot;: &quot;0.00&quot;,
+        &quot;grand_total_price&quot;: &quot;58.30&quot;,
+        &quot;booking_status&quot;: &quot;Cart&quot;,
+        &quot;cart_expired_at&quot;: &quot;2026-06-27 15:43:15&quot;,
+        &quot;booking_fnbs&quot;: [
+            {
+                &quot;name&quot;: &quot;Tasty Combo&quot;,
+                &quot;description&quot;: &quot;2 Shawarma, Pack of fries &amp; Pepsi&quot;,
+                &quot;category&quot;: &quot;Combo&quot;,
+                &quot;unit_price&quot;: &quot;28.00&quot;,
+                &quot;quantity&quot;: 1,
+                &quot;total_price&quot;: &quot;28.00&quot;
+            }
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-booking-details--booking_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-booking-details--booking_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-booking-details--booking_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-booking-details--booking_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-booking-details--booking_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-booking-details--booking_id-" data-method="GET"
+      data-path="api/booking/details/{booking_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-booking-details--booking_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/booking/details/{booking_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-booking-details--booking_id-"
+               value="Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-booking-details--booking_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-booking-details--booking_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>booking_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="booking_id"                data-endpoint="GETapi-booking-details--booking_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the booking. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="booking-POSTapi-booking-ticket">Book Ticket</h2>
 
 <p>
 <small class="badge badge-darkred">requires authentication</small>

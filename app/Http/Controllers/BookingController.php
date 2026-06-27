@@ -219,4 +219,74 @@ class BookingController extends Controller
             'booking' => new BookingResource($booking),
         ]);
     }
+
+    /**
+     * Booking Details
+     * 
+     * @response {
+     *     "status": true,
+     *     "message": "OK",
+     *     "data": {
+     *         "id": 1,
+     *         "booking_number": "B260627153315",
+     *         "user": {
+     *             "id": 2,
+     *             "first_name": "Alex Goh",
+     *             "last_name": "Kean Tiong",
+     *             "email": "alex@gmail.com"
+     *         },
+     *         "cinema": {
+     *             "name": "GSC - IOI City Mall",
+     *             "area": "Putrajaya"
+     *         },
+     *         "movie": {
+     *             "id": 3,
+     *             "title": "The Death Of Robin Hood",
+     *             "release_date": "2026-06-18",
+     *             "classification": "16",
+     *             "rating": "3.2",
+     *             "total_rating_people": 26,
+     *             "genre": [
+     *                 "Action"
+     *             ],
+     *             "synopsis": "Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.",
+     *             "director": "Michael Sarnoski",
+     *             "writers": "Michael Sarnoski",
+     *             "poster_url": "https://poster.gsc.com.my/2026/260605_TheDeathOfTheRobinhood_big.jpg",
+     *             "trailer_url": "https://youtu.be/goLcYMt7pfg?si=M9HZHLWNijcHvbOz"
+     *         },
+     *         "movie_start_at": "2026-06-28 09:20:00",
+     *         "movie_end_at": "2026-06-28 11:22:00",
+     *         "total_selected_seat": 2,
+     *         "promo_code": null,
+     *         "total_ticket_price": "30.00",
+     *         "fnb_total_price": "28.00",
+     *         "service_charges": "0.30",
+     *         "discount_price": "0.00",
+     *         "grand_total_price": "58.30",
+     *         "booking_status": "Cart",
+     *         "cart_expired_at": "2026-06-27 15:43:15",
+     *         "booking_fnbs": [
+     *             {
+     *                 "name": "Tasty Combo",
+     *                 "description": "2 Shawarma, Pack of fries & Pepsi",
+     *                 "category": "Combo",
+     *                 "unit_price": "28.00",
+     *                 "quantity": 1,
+     *                 "total_price": "28.00"
+     *             }
+     *         ]
+     *     }
+     * }
+     */
+    public function bookingDetails(Request $request, Booking $booking)
+    {
+        if ($booking->user_id != $request->user()->id) {
+            return $this->responseError('Invalid Booking.');
+        }
+        
+        $booking->load(['bookingFoodBeverages', 'cinema', 'movie']);
+
+        return $this->responseSuccess('OK', new BookingResource($booking));
+    }
 }

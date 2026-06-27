@@ -12,4 +12,14 @@ class Cinema extends Model
     ];
 
     public $timestamps = false;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

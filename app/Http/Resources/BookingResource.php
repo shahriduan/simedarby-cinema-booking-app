@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\BookingFoodBeverageResource;
+use App\Http\Resources\CinemaResource;
+use App\Http\Resources\MovieResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,8 +22,8 @@ class BookingResource extends JsonResource
             'id' => $this->id,
             'booking_number' => $this->booking_number,
             'user' => new UserResource(User::find($this->user_id)),
-            'cinema_id' => $this->cinema_id,
-            'movie_id' => $this->movie_id,
+            'cinema' => new CinemaResource($this->whenLoaded('cinema')),
+            'movie'  => new MovieResource($this->whenLoaded('movie')),
             'movie_start_at' => $this->movie_start_at->format('Y-m-d H:i:s'),
             'movie_end_at' => $this->movie_end_at->format('Y-m-d H:i:s'),
             'total_selected_seat' => $this->total_selected_seat,
@@ -31,7 +34,8 @@ class BookingResource extends JsonResource
             'discount_price' => $this->discount_price,
             'grand_total_price' => $this->grand_total_price,
             'booking_status' => $this->booking_status,
-            'cart_expired_at' => $this->cart_expired_at->format('Y-m-d H:i:s')
+            'cart_expired_at' => $this->cart_expired_at->format('Y-m-d H:i:s'),
+            'booking_fnbs' => BookingFoodBeverageResource::collection($this->whenLoaded('bookingFoodBeverages')),
         ];
     }
 }
