@@ -33,7 +33,6 @@ The backend APIs developed for this project strictly cover the primary booking f
 - Available showtimes
 - Cinema hall layouts and seat maps
 - Movie & seat pricing (uniform pricing across all sheets)
-- Food and beverage menus
 - Promo code listings
 
 ### 🎯 Out of Scope & Future Enhancements

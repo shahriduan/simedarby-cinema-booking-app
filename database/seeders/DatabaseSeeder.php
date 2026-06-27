@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CinemaSeeder::class,
             MovieSeeder::class,
-            MovieRatingSeeder::class
+            MovieRatingSeeder::class,
+            FnbSeeder::class
         ]);
     }
 }
