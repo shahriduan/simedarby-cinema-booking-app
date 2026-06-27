@@ -21,7 +21,7 @@ class Movie extends Model
     ];
 
     protected $casts = [
-        'release_date' => 'datetime',
+        'release_date' => 'date',
         'genre' => 'array'
     ];
 
@@ -33,5 +33,10 @@ class Movie extends Model
     public function cinemas()
     {
         return $this->belongsToMany(Cinema::class);
+    }
+
+    public function movieRatings()
+    {
+        return $this->hasMany(MovieRating::class)->orderBy('rating', 'desc');
     }
 }
