@@ -33,6 +33,11 @@ class Booking extends Model
         return $this->hasMany(BookingSeat::class);
     }
 
+    public function bookingFoodBeverages()
+    {
+        return $this->hasMany(BookingFoodBeverage::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Custom Logics
@@ -48,8 +53,8 @@ class Booking extends Model
         $totalPrice = $this->bookingSeats()->sum('price');
         $this->total_ticket_price = $totalPrice;
 
-        // $totalFnb = $this->bookingFoodBeverages()->sum('price');
-        // $this->fnb_total_price = $totalFnb;
+        $totalFnb = $this->bookingFoodBeverages()->sum('total_price');
+        $this->fnb_total_price = $totalFnb;
 
         $this->service_charges = (self::SERVICE_CHARGES / 100) * $this->total_ticket_price;
 

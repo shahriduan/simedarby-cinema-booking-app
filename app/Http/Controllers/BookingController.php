@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\BookingSeat;
+use App\Models\Fnb;
 use App\Models\Movie;
 use Carbon\Carbon;
 use Closure;
@@ -31,6 +32,7 @@ class BookingController extends Controller
      *     "message": "OK",
      *     "data": {
      *         "booking": {
+     *             "id": 2,
      *             "booking_number": "B260627143845",
      *             "user": {
      *                 "id": 2,
@@ -131,6 +133,90 @@ class BookingController extends Controller
         return $this->responseSuccess('OK', [
             'booking' => new BookingResource($booking),
             'seat_lock_period' => Booking::SEAT_LOCK_PERIOD
+        ]);
+    }
+
+    /**
+     * Submit Food Beverages Booking
+     * 
+     * @bodyParam   fnb                 object[]    required    List of Food and Beverage selections.
+     * @bodyParam   fnb[].fnb_id        integer     required    FnB ID. Example: 2
+     * @bodyParam   fnb[].quantity      integer     required    Quantity of FnB. Example: 2
+     * 
+     * @response {
+     *     "status": true,
+     *     "message": "OK",
+     *     "data": {
+     *         "booking": {
+     *             "id": 1,
+     *             "booking_number": "B260627153315",
+     *             "user": {
+     *                 "id": 2,
+     *                 "first_name": "Alex Goh",
+     *                 "last_name": "Kean Tiong",
+     *                 "email": "alex@gmail.com"
+     *             },
+     *             "cinema_id": 1,
+     *             "movie_id": 3,
+     *             "movie_start_at": "2026-06-28 09:20:00",
+     *             "movie_end_at": "2026-06-28 11:22:00",
+     *             "total_selected_seat": 2,
+     *             "promo_code": null,
+     *             "total_ticket_price": "30.00",
+     *             "fnb_total_price": "28.00",
+     *             "service_charges": "0.30",
+     *             "discount_price": "0.00",
+     *             "grand_total_price": "58.30",
+     *             "booking_status": "Cart",
+     *             "cart_expired_at": "2026-06-27 15:43:15"
+     *         }
+     *     }
+     * }
+     */
+    public function bookingFnb(Request $request, Booking $booking)
+    {
+        if ($booking->user_id != $request->user()->id) {
+            return $this->responseError('Invalid Booking.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'fnb' => 'required|array|min:1',
+            'fnb.*.fnb_id' => 'required|exists:App\Models\Fnb,id',
+            'fnb.*.quantity' => 'required|integer|min:1',
+        ], [], [
+            'fnb.*.fnb_id' => 'FnB',
+            'fnb.*.quantity' => 'quantity',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseError($validator->errors()->first(), $validator->errors());
+        }
+
+        foreach ($request->fnb as $fnb) {
+            $fnbModel = Fnb::find($fnb['fnb_id']);
+
+            if ($fnbModel) {
+                $booking->bookingFoodBeverages()->updateOrCreate([
+                    'fnb_id' => $fnbModel->id,
+                ], [
+                    'name' => $fnbModel->name,
+                    'description' => $fnbModel->description,
+                    'category' => $fnbModel->category,
+                    'unit_price' => $fnbModel->unit_price,
+                    'quantity' => $fnb['quantity'],
+                    'total_price' => $fnbModel->unit_price * $fnb['quantity']
+                ]);
+            }
+        }
+
+        # Delete any items currently in the database that weren't sent in this request
+        $selectedFnbIds = collect($request->fnb)->pluck('fnb_id')->toArray();
+        $booking->bookingFoodBeverages()->whereNotIn('fnb_id', $selectedFnbIds)->delete();
+
+        $booking->updateGrandTotalPrice();
+
+        return $this->responseSuccess('OK', [
+            'booking' => new BookingResource($booking),
         ]);
     }
 }

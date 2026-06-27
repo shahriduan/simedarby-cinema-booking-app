@@ -16,6 +16,7 @@ class BookingResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'booking_number' => $this->booking_number,
             'user' => new UserResource(User::find($this->user_id)),
             'cinema_id' => $this->cinema_id,

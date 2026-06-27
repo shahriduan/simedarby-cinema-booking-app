@@ -56,3 +56,5 @@ A static promo code is available to test the discount logic during the checkout 
 
 Detailed API documentation is automatically generated using Laravel Scribe. You can access the interactive docs directly through your browser at: <br>
 `http://<yourIpAddress>/apidocs`
+
+# <font color="#89CFF0">How to Test</font>

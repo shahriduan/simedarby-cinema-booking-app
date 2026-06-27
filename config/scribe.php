@@ -228,7 +228,10 @@ return [
             ...Defaults::URL_PARAMETERS_STRATEGIES,
         ],
         'queryParameters' => [
-            ...Defaults::QUERY_PARAMETERS_STRATEGIES,
+            // ...Defaults::QUERY_PARAMETERS_STRATEGIES,
+            Strategies\QueryParameters\GetFromInlineValidator::class,
+            Strategies\QueryParameters\GetFromQueryParamAttribute::class,
+            Strategies\QueryParameters\GetFromQueryParamTag::class,
         ],
         'bodyParameters' => [
             // ...Defaults::BODY_PARAMETERS_STRATEGIES,
