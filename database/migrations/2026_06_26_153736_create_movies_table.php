@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('duration_minutes')->default(0);
             $table->decimal('rating', 5, 1)->default(0);
             $table->integer('total_rating_people')->default(0);
+            $table->json('genre')->nullable();
             $table->text('synopsis')->nullable();
             $table->string('casts')->nullable();
             $table->string('director')->nullable();
