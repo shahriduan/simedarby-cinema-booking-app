@@ -89,6 +89,12 @@
                                                                                 <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-fnb--booking_id-">
                                 <a href="#booking-POSTapi-booking-fnb--booking_id-">Submit Food Beverages Booking</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-redeem-promo--booking_id-">
+                                <a href="#booking-POSTapi-booking-redeem-promo--booking_id-">Redeem Promo Code</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-payment--booking_id-">
+                                <a href="#booking-POSTapi-booking-payment--booking_id-">Make a Payment</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-cinema" class="tocify-header">
@@ -1187,6 +1193,344 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                     </details>
         </div>
         </form>
+
+                    <h2 id="booking-POSTapi-booking-redeem-promo--booking_id-">Redeem Promo Code</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-booking-redeem-promo--booking_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/booking/redeem-promo/1';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'promo_code' =&gt; 'PROMO5',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/booking/redeem-promo/1"
+);
+
+const headers = {
+    "Authorization": "Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "promo_code": "PROMO5"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://127.0.0.1:8000/api/booking/redeem-promo/1'
+payload = {
+    "promo_code": "PROMO5"
+}
+headers = {
+  'Authorization': 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers, json=payload)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-booking-redeem-promo--booking_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;message&quot;: &quot;Promo code applied&quot;,
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-booking-redeem-promo--booking_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-booking-redeem-promo--booking_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-booking-redeem-promo--booking_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-booking-redeem-promo--booking_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-booking-redeem-promo--booking_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-booking-redeem-promo--booking_id-" data-method="POST"
+      data-path="api/booking/redeem-promo/{booking_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-booking-redeem-promo--booking_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/booking/redeem-promo/{booking_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-booking-redeem-promo--booking_id-"
+               value="Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-booking-redeem-promo--booking_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-booking-redeem-promo--booking_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>booking_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="booking_id"                data-endpoint="POSTapi-booking-redeem-promo--booking_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the booking. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>promo_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="promo_code"                data-endpoint="POSTapi-booking-redeem-promo--booking_id-"
+               value="PROMO5"
+               data-component="body">
+    <br>
+<p>Promo code. Example: <code>PROMO5</code></p>
+        </div>
+        </form>
+
+                    <h2 id="booking-POSTapi-booking-payment--booking_id-">Make a Payment</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-booking-payment--booking_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/booking/payment/1';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/booking/payment/1"
+);
+
+const headers = {
+    "Authorization": "Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://127.0.0.1:8000/api/booking/payment/1'
+headers = {
+  'Authorization': 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('POST', url, headers=headers)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-booking-payment--booking_id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: false,
+    &quot;message&quot;: &quot;Invalid Booking.&quot;,
+    &quot;error&quot;: [],
+    &quot;data&quot;: []
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-booking-payment--booking_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-booking-payment--booking_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-booking-payment--booking_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-booking-payment--booking_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-booking-payment--booking_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-booking-payment--booking_id-" data-method="POST"
+      data-path="api/booking/payment/{booking_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-booking-payment--booking_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/booking/payment/{booking_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-booking-payment--booking_id-"
+               value="Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-booking-payment--booking_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-booking-payment--booking_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>booking_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="booking_id"                data-endpoint="POSTapi-booking-payment--booking_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the booking. Example: <code>1</code></p>
+            </div>
+                    </form>
 
                 <h1 id="cinema">Cinema</h1>
 

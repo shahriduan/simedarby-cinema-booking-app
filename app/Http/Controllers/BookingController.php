@@ -289,4 +289,72 @@ class BookingController extends Controller
 
         return $this->responseSuccess('OK', new BookingResource($booking));
     }
+
+    /**
+     * Redeem Promo Code
+     * 
+     * @bodyParam   promo_code  string  required    Promo code. Example: PROMO5
+     * 
+     * @response {
+     *     "status": true,
+     *     "message": "Promo code applied",
+     *     "data": []
+     * }
+     */
+    public function redeemPromo(Request $request, Booking $booking)
+    {
+        if ($booking->user_id != $request->user()->id) {
+            return $this->responseError('Invalid Booking.');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'promo_code' => [
+                'required',
+                function (string $attribute, mixed $value, Closure $fail) use ($request, $booking) {
+                    if ($booking->status == Booking::STATUS_PAID) {
+                        $fail('This booking is already completed and paid for.');
+                    } elseif (isset($booking->promo_code)) {
+                        $fail('You’ve already redeemed this promo code');
+                    } elseif ($request->promo_code != Booking::PROMO_CODE) {
+                        $fail('Invalid promo code.');
+                    }
+                },
+            ]
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseError($validator->errors()->first(), $validator->errors());
+        }
+
+        $booking->promo_code = $request->promo_code;
+        $booking->discount_price = Booking::PROMO_DISCOUNT;
+        $booking->save();
+
+        $booking->updateGrandTotalPrice();
+
+        return $this->responseSuccess('Promo code applied');
+
+    }
+
+    /**
+     * Make a Payment
+     * 
+     * @response {
+     *     "status": false,
+     *     "message": "Invalid Booking.",
+     *     "error": [],
+     *     "data": []
+     * }
+     */
+    public function bookingPayment(Request $request, Booking $booking)
+    {
+        if ($booking->user_id != $request->user()->id) {
+            return $this->responseError('Invalid Booking.');
+        }
+
+        $booking->booking_status = Booking::STATUS_PAID;
+        $booking->save();
+
+        return $this->responseSuccess('OK');
+    }
 }

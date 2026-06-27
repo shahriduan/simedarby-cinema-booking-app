@@ -10,8 +10,10 @@ class Booking extends Model
     const STATUS_CART = 'Cart';
 
     const TICKET_PRICE = 15; // RM
-    const SERVICE_CHARGES = 1; // %
+    const SERVICE_CHARGES = 5; // %
     const SEAT_LOCK_PERIOD = 10; // Minutes
+    const PROMO_CODE = 'PROMO5';
+    const PROMO_DISCOUNT = 5; // RM
 
     protected $casts = [
         'movie_start_at' => 'datetime',
