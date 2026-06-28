@@ -9,6 +9,7 @@ use App\Models\Fnb;
 use App\Models\Movie;
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -356,5 +357,76 @@ class BookingController extends Controller
         $booking->save();
 
         return $this->responseSuccess('OK');
+    }
+
+    /**
+     * List Unavailable Seats
+     * 
+     * Fetches a list of seats that are currently unavailable for selection.
+     * * ### 🔄 Client-Side Polling
+     * This endpoint is designed to be polled periodically by the client application, while the user is on the seat selection screen to ensure real-time seat availability.
+     * * ### 💺 Seat Status Types (Refer response)
+     *      - `Booked`: The seat has been successfully reserved and paid for.
+     *      - `Lock`: Temporary state. The seat is temporarily locked by another user who is currently in the checkout flow.
+     * 
+     * @queryParam  cinema_id       integer     required    Cinema ID. Example: 1
+     * @queryParam  movie_id        integer     required    Movie ID. Example: 1
+     * @queryParam  showtime_slot   string      required    Showtime slot. Example: 2026-06-28 09:20:00
+     * 
+     * @response {
+     *     "status": true,
+     *     "message": "OK",
+     *     "data": [
+     *         {
+     *             "seat": "F1",
+     *             "status": "Booked"
+     *         },
+     *         {
+     *             "seat": "G2",
+     *             "status": "Lock"
+     *         }
+     *     ]
+     * }
+     */
+    public function getUnavailableSeats(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'cinema_id' => 'required|exists:App\Models\Cinema,id',
+            'movie_id' => 'required|exists:App\Models\Movie,id',
+            'showtime_slot' => 'required'
+        ], [], [
+            'cinema_id' => 'cinama',
+            'movie_id' => 'movie',
+            'showtime_slot' => 'showtime'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseError($validator->errors()->first(), $validator->errors());
+        }
+
+        $unavailableSeats = BookingSeat::whereHas('booking', function (Builder $query) use ($request) {
+                $query->where('cinema_id', $request->query('cinema_id'))
+                      ->where('movie_id', $request->query('movie_id'))
+                      ->where('movie_start_at', $request->query('showtime_slot'))
+                      ->where(function ($statusQuery) {
+                            $statusQuery->where('booking_status', Booking::STATUS_PAID)
+                                        ->orWhere(function ($cartQuery) {
+                                            $cartQuery->where('booking_status', Booking::STATUS_CART)
+                                                      ->where('cart_expired_at', '>', now());
+                                        });
+                      });
+            })
+            ->orderBy('seat')
+            ->get()
+            ->map(function ($bookingSeat) {
+                return [
+                    'seat' => $bookingSeat->seat,
+                    'status' => $bookingSeat->booking->booking_status == Booking::STATUS_PAID ? 'Booked' : 'Lock',
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        return $this->responseSuccess('OK', $unavailableSeats);
     }
 }

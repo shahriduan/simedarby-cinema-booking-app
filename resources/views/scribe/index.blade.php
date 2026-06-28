@@ -95,6 +95,9 @@
                                                                                 <li class="tocify-item level-2" data-unique="booking-POSTapi-booking-payment--booking_id-">
                                 <a href="#booking-POSTapi-booking-payment--booking_id-">Make a Payment</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="booking-GETapi-booking-showtime-unavailable-seats">
+                                <a href="#booking-GETapi-booking-showtime-unavailable-seats">List Unavailable Seats</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-cinema" class="tocify-header">
@@ -142,7 +145,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: June 27, 2026</li>
+        <li>Last updated: June 28, 2026</li>
     </ul>
 </div>
 
@@ -1531,6 +1534,227 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>The ID of the booking. Example: <code>1</code></p>
             </div>
                     </form>
+
+                    <h2 id="booking-GETapi-booking-showtime-unavailable-seats">List Unavailable Seats</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Fetches a list of seats that are currently unavailable for selection.</p>
+<ul>
+<li>
+<h3>🔄 Client-Side Polling</h3>
+<p>This endpoint is designed to be polled periodically by the client application, while the user is on the seat selection screen to ensure real-time seat availability.</p>
+</li>
+<li>
+<h3>💺 Seat Status Types (Refer response)</h3>
+<ul>
+<li><code>Booked</code>: The seat has been successfully reserved and paid for.</li>
+<li><code>Lock</code>: Temporary state. The seat is temporarily locked by another user who is currently in the checkout flow.</li>
+</ul>
+</li>
+</ul>
+
+<span id="example-requests-GETapi-booking-showtime-unavailable-seats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/booking/showtime/unavailable-seats';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'cinema_id' =&gt; '1',
+            'movie_id' =&gt; '1',
+            'showtime_slot' =&gt; '2026-06-28 09:20:00',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/booking/showtime/unavailable-seats"
+);
+
+const params = {
+    "cinema_id": "1",
+    "movie_id": "1",
+    "showtime_slot": "2026-06-28 09:20:00",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="python-example">
+    <pre><code class="language-python">import requests
+import json
+
+url = 'http://127.0.0.1:8000/api/booking/showtime/unavailable-seats'
+params = {
+  'cinema_id': '1',
+  'movie_id': '1',
+  'showtime_slot': '2026-06-28 09:20:00',
+}
+headers = {
+  'Authorization': 'Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999',
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+response = requests.request('GET', url, headers=headers, params=params)
+response.json()</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-booking-showtime-unavailable-seats">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: true,
+    &quot;message&quot;: &quot;OK&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;seat&quot;: &quot;F1&quot;,
+            &quot;status&quot;: &quot;Booked&quot;
+        },
+        {
+            &quot;seat&quot;: &quot;G2&quot;,
+            &quot;status&quot;: &quot;Lock&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-booking-showtime-unavailable-seats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-booking-showtime-unavailable-seats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-booking-showtime-unavailable-seats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-booking-showtime-unavailable-seats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-booking-showtime-unavailable-seats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-booking-showtime-unavailable-seats" data-method="GET"
+      data-path="api/booking/showtime/unavailable-seats"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-booking-showtime-unavailable-seats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/booking/showtime/unavailable-seats</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-booking-showtime-unavailable-seats"
+               value="Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer 35|5IV46RkmdNU9igP6jZuGYgvtOT4lS1qsKaEqtr6B589fb999</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-booking-showtime-unavailable-seats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-booking-showtime-unavailable-seats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>cinema_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cinema_id"                data-endpoint="GETapi-booking-showtime-unavailable-seats"
+               value="1"
+               data-component="query">
+    <br>
+<p>Cinema ID. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>movie_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="movie_id"                data-endpoint="GETapi-booking-showtime-unavailable-seats"
+               value="1"
+               data-component="query">
+    <br>
+<p>Movie ID. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>showtime_slot</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="showtime_slot"                data-endpoint="GETapi-booking-showtime-unavailable-seats"
+               value="2026-06-28 09:20:00"
+               data-component="query">
+    <br>
+<p>Showtime slot. Example: <code>2026-06-28 09:20:00</code></p>
+            </div>
+                </form>
 
                 <h1 id="cinema">Cinema</h1>
 

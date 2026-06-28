@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::post('fnb/{booking}', [BookingController::class, 'bookingFnb']);
         Route::post('redeem-promo/{booking}', [BookingController::class, 'redeemPromo']);
         Route::post('payment/{booking}', [BookingController::class, 'bookingPayment']);
+        Route::get('showtime/unavailable-seats', [BookingController::class, 'getUnavailableSeats']);
     });
 });
 
