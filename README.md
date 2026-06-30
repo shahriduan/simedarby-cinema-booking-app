@@ -152,7 +152,7 @@ GET /api/booking/ticket
 - Display available seats 
     - To keep the seating chart updated and prevent two users from choosing the same seat, the application uses **polling**. This means the app automatically sends a background request to the server every few seconds to fetch the latest layout.
 
-> 💡 **Technical Note:** We use polling here because it is simple to build for this test. However, for a real app with many users, **WebSockets** is the best choice. WebSockets create a single, permanent connection that sends instant updates only when a seat is taken. This stops the app from making wasteful requests and keeps it running fast.
+> 💡 **Technical Note:** I am using polling here because it is simple to build for this test. However, for a real app with many users, **WebSockets** is the best choice. WebSockets create a single, permanent connection that sends instant updates only when a seat is taken. This stops the app from making wasteful requests and keeps it running fast.
 
 ### 5. Food & Beverage Screen
 
