@@ -55,25 +55,49 @@ class MovieController extends Controller
      *     "data": {
      *         "id": 4,
      *         "title": "Masters Of The Universe",
-     *         "release_date": "2026-06-04",
+     *         "release_date": "04 Jun 2026",
+     *         "duration": "2h 21m",
      *         "classification": "13",
-     *         "rating": "3.3",
-     *         "total_rating_people": 46,
+     *         "rating": "3.6",
+     *         "total_rating_people": 47,
      *         "genre": [
      *             "Action"
      *         ],
      *         "synopsis": "A young man on Earth discovers a fabulous secret legacy as the prince of an alien planet, and must recover a magic sword and return home to protect his kingdom.",
      *         "director": "Travis Knight",
      *         "writers": "Chris Butler, Aaron Nee, Adam Nee",
+     *         "casts": "Nicholas Galitzine, Morena Baccarin, Idris Elba, James Purefoy, Jared Leto",
      *         "poster_url": "https://poster.gsc.com.my/2025/251117_MastersOfTheUniverse_big.jpg",
      *         "trailer_url": "https://youtu.be/Vf_5H3T8Y7Q?si=HOg0l0F5EeMOpMvG",
      *         "movie_reviews": [
      *             {
-     *                 "id": 147,
-     *                 "name": "Rasammah a/l Mutahir",
+     *                 "id": 124,
+     *                 "name": "Go Chet Tim",
      *                 "rating": 5,
      *                 "review_title": "Good movie but pacing was a bit slow.",
-     *                 "review_content": "Perspiciatis modi corrupti qui qui omnis modi sit. Laborum odio commodi fugiat et iure recusandae. Ut rerum minima accusamus ut."
+     *                 "review_content": "Architecto blanditiis et quidem ut. Ut nostrum qui necessitatibus ut. Nemo deleniti commodi eum."
+     *             }
+     *         ],
+     *         "rating_breakdown": [
+     *             {
+     *                 "stars": 5,
+     *                 "count": 15
+     *             },
+     *             {
+     *                 "stars": 4,
+     *                 "count": 10
+     *             },
+     *             {
+     *                 "stars": 3,
+     *                 "count": 11
+     *             },
+     *             {
+     *                 "stars": 2,
+     *                 "count": 11
+     *             },
+     *             {
+     *                 "stars": 1,
+     *                 "count": 0
      *             }
      *         ]
      *     }

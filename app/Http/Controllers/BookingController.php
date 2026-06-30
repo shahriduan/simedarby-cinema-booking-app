@@ -26,7 +26,7 @@ class BookingController extends Controller
      * @bodyParam   cinema_id       integer     required    Cinema ID. Example: 1
      * @bodyParam   movie_id        integer     required    Movie ID. Example: 2
      * @bodyParam   showtime_slot   string      required    Slot datetime. Example: 2026-06-07 09:20:00
-     * @bodyparam   seats           string[]    required    Selected seats. Example: ["F4", "F5", "F6"]
+     * @bodyparam   seats           string[]    required    Selected seats. Example: ["F-4", "F-5", "F-6"]
      * 
      * @response {
      *     "status": true,
@@ -98,7 +98,9 @@ class BookingController extends Controller
                     }
                 },
             ]
-        ], [], [
+        ], [
+            'showtime_slot.date_format' => 'Please select showtime.'
+        ], [
             'cinema_id' => 'cinema',
             'movie_id' => 'movie',
         ]);
