@@ -14,6 +14,7 @@ Route::get('areas', [CinemaController::class, 'listAreas']);
 Route::get('cinemas', [CinemaController::class, 'listCinemas']);
 
 Route::middleware('auth:sanctum')->group(function() {
+    Route::post('logout', [AuthController::class, 'logout']);
     Route::get('user', [AuthController::class, 'getUser']);
 
     # Food and Beverages

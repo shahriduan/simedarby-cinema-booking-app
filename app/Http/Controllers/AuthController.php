@@ -87,4 +87,22 @@ class AuthController extends Controller
     {
         return $this->responseSuccess('OK', new UserResource($request->user()));
     }
+
+    /**
+     * Logout
+     *
+     * @authenticated
+     *
+     * @response {
+     *     "status": true,
+     *     "message": "OK",
+     *     "data": []
+     * }
+     */
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->responseSuccess('OK');
+    }
 }
