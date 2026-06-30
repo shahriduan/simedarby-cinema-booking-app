@@ -25,7 +25,7 @@ class MovieSeeder extends Seeder
                 'casts' => 'Milly Alcock, Eve Ridley, Matthias Schoenaerts, Jason Momoa, David Krumholtz',
                 'director' => 'Craig Gillespie',
                 'writers' => 'Ana Nogueira, Jerry Siegel, Joe Shuster',
-                'poster_url' => 'https://poster.gsc.com.my/2025/250717_Supergirl_big.jpg',
+                'poster_url' => '/img/movies/supergirl.jpg',
                 'trailer_url' => 'https://youtu.be/rIRlkL1U3zY?si=jXo0IDc1vWmsS1wg'
             ],
             [
@@ -38,7 +38,7 @@ class MovieSeeder extends Seeder
                 'casts' => 'Tim Allen, Blake Clark,Tom Hanks, Joan Cusack, Greta Lee',
                 'director' => 'McKenna Harris, Andrew Stanton',
                 'writers' => 'Andrew Stanton, McKenna Harris',
-                'poster_url' => 'https://poster.gsc.com.my/2024/240811_ToyStory5_big.jpg',
+                'poster_url' => '/img/movies/toy-story-5.jpg',
                 'trailer_url' => 'https://youtu.be/NFJk9JtHCTw?si=yw2knq3V-g48SSdR'
             ],
             [
@@ -51,7 +51,7 @@ class MovieSeeder extends Seeder
                 'casts' => 'Hugh Jackman, Jodie Comer, Bill Skarsgård, Murray Bartlett, Noah Jupe, Faith Delaney',
                 'director' => 'Michael Sarnoski',
                 'writers' => 'Michael Sarnoski',
-                'poster_url' => 'https://poster.gsc.com.my/2026/260605_TheDeathOfTheRobinhood_big.jpg',
+                'poster_url' => '/img/movies/the-death-of-robin-hood.jpg',
                 'trailer_url' => 'https://youtu.be/goLcYMt7pfg?si=M9HZHLWNijcHvbOz'
             ],
             [
@@ -64,7 +64,7 @@ class MovieSeeder extends Seeder
                 'casts' => 'Nicholas Galitzine, Morena Baccarin, Idris Elba, James Purefoy, Jared Leto',
                 'director' => 'Travis Knight',
                 'writers' => 'Chris Butler, Aaron Nee, Adam Nee',
-                'poster_url' => 'https://poster.gsc.com.my/2025/251117_MastersOfTheUniverse_big.jpg',
+                'poster_url' => '/img/movies/masters-of-the-universe.jpg',
                 'trailer_url' => 'https://youtu.be/Vf_5H3T8Y7Q?si=HOg0l0F5EeMOpMvG'
             ]
         ];

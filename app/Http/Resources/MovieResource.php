@@ -26,7 +26,7 @@ class MovieResource extends JsonResource
             'synopsis' => $this->synopsis,
             'director' => $this->director,
             'writers' => $this->writers,
-            'poster_url' => $this->poster_url,
+            'poster_url' => asset($this->poster_url),
             'trailer_url' => $this->trailer_url,
             'movie_reviews' => MovieRatingResource::collection($this->whenLoaded('movieRatings')),
         ];
