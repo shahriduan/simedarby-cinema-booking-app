@@ -18,12 +18,15 @@ class BookingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->load('bookingSeats');
+        
         return [
             'id' => $this->id,
             'booking_number' => $this->booking_number,
             'user' => new UserResource(User::find($this->user_id)),
             'cinema' => new CinemaResource($this->whenLoaded('cinema')),
-            'movie'  => new MovieResource($this->whenLoaded('movie')),
+            'movie' => new MovieResource($this->whenLoaded('movie')),
+            'seats' => $this->bookingSeats()->pluck('seat'),
             'movie_start_at' => $this->movie_start_at->format('Y-m-d H:i:s'),
             'movie_end_at' => $this->movie_end_at->format('Y-m-d H:i:s'),
             'total_selected_seat' => $this->total_selected_seat,

@@ -34,26 +34,28 @@ class BookingController extends Controller
      *     "data": {
      *         "booking": {
      *             "id": 2,
-     *             "booking_number": "B260627143845",
+     *             "booking_number": "B260630170202",
      *             "user": {
-     *                 "id": 2,
-     *                 "first_name": "Alex Goh",
-     *                 "last_name": "Kean Tiong",
-     *                 "email": "alex@gmail.com"
+     *                 "id": 4,
+     *                 "first_name": "Amirul",
+     *                 "last_name": "Zakariah",
+     *                 "email": "amirul@gmail.com"
      *             },
-     *             "cinema_id": 1,
-     *             "movie_id": 3,
-     *             "movie_start_at": "2026-06-28 09:20:00",
-     *             "movie_end_at": "2026-06-28 11:22:00",
+     *             "seats": [
+     *                 "G1",
+     *                 "G2"
+     *             ],
+     *             "movie_start_at": "2026-07-01 09:20:00",
+     *             "movie_end_at": "2026-07-01 11:22:00",
      *             "total_selected_seat": 2,
      *             "promo_code": null,
      *             "total_ticket_price": "30.00",
      *             "fnb_total_price": "0.00",
-     *             "service_charges": "0.30",
+     *             "service_charges": "1.50",
      *             "discount_price": "0.00",
-     *             "grand_total_price": "30.30",
+     *             "grand_total_price": "31.50",
      *             "booking_status": "Cart",
-     *             "cart_expired_at": "2026-06-27 14:48:45"
+     *             "cart_expired_at": "2026-06-30 17:12:02"
      *         },
      *         "seat_lock_period": 10
      *     }
@@ -151,27 +153,29 @@ class BookingController extends Controller
      *     "message": "OK",
      *     "data": {
      *         "booking": {
-     *             "id": 1,
-     *             "booking_number": "B260627153315",
+     *             "id": 2,
+     *             "booking_number": "B260630170202",
      *             "user": {
-     *                 "id": 2,
-     *                 "first_name": "Alex Goh",
-     *                 "last_name": "Kean Tiong",
-     *                 "email": "alex@gmail.com"
+     *                 "id": 4,
+     *                 "first_name": "Amirul",
+     *                 "last_name": "Zakariah",
+     *                 "email": "amirul@gmail.com"
      *             },
-     *             "cinema_id": 1,
-     *             "movie_id": 3,
-     *             "movie_start_at": "2026-06-28 09:20:00",
-     *             "movie_end_at": "2026-06-28 11:22:00",
+     *             "seats": [
+     *                 "G1",
+     *                 "G2"
+     *             ],
+     *             "movie_start_at": "2026-07-01 09:20:00",
+     *             "movie_end_at": "2026-07-01 11:22:00",
      *             "total_selected_seat": 2,
      *             "promo_code": null,
      *             "total_ticket_price": "30.00",
-     *             "fnb_total_price": "28.00",
-     *             "service_charges": "0.30",
+     *             "fnb_total_price": "32.00",
+     *             "service_charges": "1.50",
      *             "discount_price": "0.00",
-     *             "grand_total_price": "58.30",
+     *             "grand_total_price": "63.50",
      *             "booking_status": "Cart",
-     *             "cart_expired_at": "2026-06-27 15:43:15"
+     *             "cart_expired_at": "2026-06-30 17:12:02"
      *         }
      *     }
      * }
@@ -231,54 +235,52 @@ class BookingController extends Controller
      *     "message": "OK",
      *     "data": {
      *         "id": 1,
-     *         "booking_number": "B260627153315",
+     *         "booking_number": "B260630165531",
      *         "user": {
-     *             "id": 2,
-     *             "first_name": "Alex Goh",
-     *             "last_name": "Kean Tiong",
-     *             "email": "alex@gmail.com"
+     *             "id": 4,
+     *             "first_name": "Amirul",
+     *             "last_name": "Zakariah",
+     *             "email": "amirul@gmail.com"
      *         },
      *         "cinema": {
-     *             "name": "GSC - IOI City Mall",
-     *             "area": "Putrajaya"
+     *             "name": "GSC - Subang Parade",
+     *             "area": "Subang Jaya"
      *         },
      *         "movie": {
-     *             "id": 3,
-     *             "title": "The Death Of Robin Hood",
-     *             "release_date": "2026-06-18",
-     *             "classification": "16",
-     *             "rating": "3.2",
-     *             "total_rating_people": 26,
+     *             "id": 4,
+     *             "title": "Masters Of The Universe",
+     *             "release_date": "04 Jun 2026",
+     *             "duration": "2h 21m",
+     *             "classification": "13",
+     *             "rating": "3.6",
+     *             "total_rating_people": 38,
      *             "genre": [
      *                 "Action"
      *             ],
-     *             "synopsis": "Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.",
-     *             "director": "Michael Sarnoski",
-     *             "writers": "Michael Sarnoski",
-     *             "poster_url": "https://poster.gsc.com.my/2026/260605_TheDeathOfTheRobinhood_big.jpg",
-     *             "trailer_url": "https://youtu.be/goLcYMt7pfg?si=M9HZHLWNijcHvbOz"
+     *             "synopsis": "A young man on Earth discovers a fabulous secret legacy as the prince of an alien planet, and must recover a magic sword and return home to protect his kingdom.",
+     *             "director": "Travis Knight",
+     *             "writers": "Chris Butler, Aaron Nee, Adam Nee",
+     *             "casts": "Nicholas Galitzine, Morena Baccarin, Idris Elba, James Purefoy, Jared Leto",
+     *             "poster_url": "https://poster.gsc.com.my/2025/251117_MastersOfTheUniverse_big.jpg",
+     *             "trailer_url": "https://youtu.be/Vf_5H3T8Y7Q?si=HOg0l0F5EeMOpMvG"
      *         },
-     *         "movie_start_at": "2026-06-28 09:20:00",
-     *         "movie_end_at": "2026-06-28 11:22:00",
-     *         "total_selected_seat": 2,
+     *         "seats": [
+     *             "F-4",
+     *             "F-5",
+     *             "F-6"
+     *         ],
+     *         "movie_start_at": "2026-07-05 17:40:00",
+     *         "movie_end_at": "2026-07-05 20:01:00",
+     *         "total_selected_seat": 3,
      *         "promo_code": null,
-     *         "total_ticket_price": "30.00",
-     *         "fnb_total_price": "28.00",
-     *         "service_charges": "0.30",
+     *         "total_ticket_price": "45.00",
+     *         "fnb_total_price": "0.00",
+     *         "service_charges": "2.25",
      *         "discount_price": "0.00",
-     *         "grand_total_price": "58.30",
-     *         "booking_status": "Cart",
-     *         "cart_expired_at": "2026-06-27 15:43:15",
-     *         "booking_fnbs": [
-     *             {
-     *                 "name": "Tasty Combo",
-     *                 "description": "2 Shawarma, Pack of fries & Pepsi",
-     *                 "category": "Combo",
-     *                 "unit_price": "28.00",
-     *                 "quantity": 1,
-     *                 "total_price": "28.00"
-     *             }
-     *         ]
+     *         "grand_total_price": "47.25",
+     *         "booking_status": "Paid",
+     *         "cart_expired_at": "2026-06-30 17:05:31",
+     *         "booking_fnbs": []
      *     }
      * }
      */

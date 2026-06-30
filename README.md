@@ -31,6 +31,9 @@ To start the Laravel development server and make it accessible across your local
 ```
 php artisan serve --host=0.0.0.0 --port=8000
 ```
+Output:
+<img src="artisan-serve.png" width="100%" alt="serve"/>
+
 # <font color="#89CFF0">Login Account</font>
 
 This application does not include a public registration feature. To test the booking flow, you can log in using any of the four pre-configured test accounts below:
