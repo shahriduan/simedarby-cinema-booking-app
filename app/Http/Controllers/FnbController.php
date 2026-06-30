@@ -26,6 +26,7 @@ class FnbController extends Controller
      *             "category": "Combo",
      *             "items": [
      *                 {
+     *                     "id": 1,
      *                     "name": "Tasty Combo",
      *                     "description": "2 Shawarma, Pack of fries & Pepsi",
      *                     "unit_price": 28
@@ -37,7 +38,7 @@ class FnbController extends Controller
      */
     public function fnbMenu(Request $request)
     {
-        $menu = Fnb::select('category', 'name', 'description', 'unit_price')
+        $menu = Fnb::select('id', 'category', 'name', 'description', 'unit_price')
             ->get()
             ->groupBy('category')
             ->map(function ($items, $category) {
@@ -45,6 +46,7 @@ class FnbController extends Controller
                     'category' => $category,
                     'items' => $items->map(function ($item) {
                         return [
+                            'id' => $item->id,
                             'name' => $item->name,
                             'description' => $item->description,
                             'unit_price' => (float) $item->unit_price,

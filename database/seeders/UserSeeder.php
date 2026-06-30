@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'last_name' => 'Razali'
         ], [
             'email' => 'najmuddin@gmail.com',
-            'password' => 'najmuddin@1'
+            'password' => 'Password@1'
         ]);
 
         User::firstOrCreate([
@@ -26,7 +26,23 @@ class UserSeeder extends Seeder
             'last_name' => 'Kean Tiong'
         ], [
             'email' => 'alex@gmail.com',
-            'password' => 'alex@2'
+            'password' => 'Password@2'
+        ]);
+
+        User::firstOrCreate([
+            'first_name' => 'Faizuddin',
+            'last_name' => 'Azman'
+        ], [
+            'email' => 'faizuddin@gmail.com',
+            'password' => 'Password@3'
+        ]);
+
+        User::firstOrCreate([
+            'first_name' => 'Amirul',
+            'last_name' => 'Zakariah'
+        ], [
+            'email' => 'amirul@gmail.com',
+            'password' => 'Password@4'
         ]);
     }
 }

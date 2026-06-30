@@ -878,9 +878,9 @@ $response = $client-&gt;post(
             'movie_id' =&gt; 2,
             'showtime_slot' =&gt; '2026-06-07 09:20:00',
             'seats' =&gt; [
-                'F4',
-                'F5',
-                'F6',
+                'F-4',
+                'F-5',
+                'F-6',
             ],
         ],
     ]
@@ -905,9 +905,9 @@ let body = {
     "movie_id": 2,
     "showtime_slot": "2026-06-07 09:20:00",
     "seats": [
-        "F4",
-        "F5",
-        "F6"
+        "F-4",
+        "F-5",
+        "F-6"
     ]
 };
 
@@ -928,9 +928,9 @@ payload = {
     "movie_id": 2,
     "showtime_slot": "2026-06-07 09:20:00",
     "seats": [
-        "F4",
-        "F5",
-        "F6"
+        "F-4",
+        "F-5",
+        "F-6"
     ]
 }
 headers = {
@@ -2289,6 +2289,7 @@ response.json()</code></pre></div>
             &quot;category&quot;: &quot;Combo&quot;,
             &quot;items&quot;: [
                 {
+                    &quot;id&quot;: 1,
                     &quot;name&quot;: &quot;Tasty Combo&quot;,
                     &quot;description&quot;: &quot;2 Shawarma, Pack of fries &amp; Pepsi&quot;,
                     &quot;unit_price&quot;: 28
@@ -2587,25 +2588,49 @@ response.json()</code></pre></div>
     &quot;data&quot;: {
         &quot;id&quot;: 4,
         &quot;title&quot;: &quot;Masters Of The Universe&quot;,
-        &quot;release_date&quot;: &quot;2026-06-04&quot;,
+        &quot;release_date&quot;: &quot;04 Jun 2026&quot;,
+        &quot;duration&quot;: &quot;2h 21m&quot;,
         &quot;classification&quot;: &quot;13&quot;,
-        &quot;rating&quot;: &quot;3.3&quot;,
-        &quot;total_rating_people&quot;: 46,
+        &quot;rating&quot;: &quot;3.6&quot;,
+        &quot;total_rating_people&quot;: 47,
         &quot;genre&quot;: [
             &quot;Action&quot;
         ],
         &quot;synopsis&quot;: &quot;A young man on Earth discovers a fabulous secret legacy as the prince of an alien planet, and must recover a magic sword and return home to protect his kingdom.&quot;,
         &quot;director&quot;: &quot;Travis Knight&quot;,
         &quot;writers&quot;: &quot;Chris Butler, Aaron Nee, Adam Nee&quot;,
+        &quot;casts&quot;: &quot;Nicholas Galitzine, Morena Baccarin, Idris Elba, James Purefoy, Jared Leto&quot;,
         &quot;poster_url&quot;: &quot;https://poster.gsc.com.my/2025/251117_MastersOfTheUniverse_big.jpg&quot;,
         &quot;trailer_url&quot;: &quot;https://youtu.be/Vf_5H3T8Y7Q?si=HOg0l0F5EeMOpMvG&quot;,
         &quot;movie_reviews&quot;: [
             {
-                &quot;id&quot;: 147,
-                &quot;name&quot;: &quot;Rasammah a/l Mutahir&quot;,
+                &quot;id&quot;: 124,
+                &quot;name&quot;: &quot;Go Chet Tim&quot;,
                 &quot;rating&quot;: 5,
                 &quot;review_title&quot;: &quot;Good movie but pacing was a bit slow.&quot;,
-                &quot;review_content&quot;: &quot;Perspiciatis modi corrupti qui qui omnis modi sit. Laborum odio commodi fugiat et iure recusandae. Ut rerum minima accusamus ut.&quot;
+                &quot;review_content&quot;: &quot;Architecto blanditiis et quidem ut. Ut nostrum qui necessitatibus ut. Nemo deleniti commodi eum.&quot;
+            }
+        ],
+        &quot;rating_breakdown&quot;: [
+            {
+                &quot;stars&quot;: 5,
+                &quot;count&quot;: 15
+            },
+            {
+                &quot;stars&quot;: 4,
+                &quot;count&quot;: 10
+            },
+            {
+                &quot;stars&quot;: 3,
+                &quot;count&quot;: 11
+            },
+            {
+                &quot;stars&quot;: 2,
+                &quot;count&quot;: 11
+            },
+            {
+                &quot;stars&quot;: 1,
+                &quot;count&quot;: 0
             }
         ]
     }

@@ -31,6 +31,16 @@ To start the Laravel development server and make it accessible across your local
 ```
 php artisan serve --host=0.0.0.0 --port=8000
 ```
+# <font color="#89CFF0">Login Account</font>
+
+This application does not include a public registration feature. To test the booking flow, you can log in using any of the four pre-configured test accounts below:
+
+| User | Email | Password |
+| :--- | :--- | :--- |
+| User 1 | najmuddin@gmail.com | Password@1 |
+| User 2 | alex@gmail.com | Password@2 |
+| User 3 | faizuddin@gmail.com | Password@3 |
+| User 4 | amirul@gmail.com | Password@4 |
 
 # <font color="#89CFF0">Important Notes You Should Know</font>
 
@@ -169,6 +179,9 @@ The system displays a summary of the booking before payment.
 ```http
 GET /api/booking/details/{bookingId}
 ```
+```http
+GET /api/booking/redeem-promo/{bookingId}
+```
 
 **Purpose**
 
@@ -177,6 +190,7 @@ GET /api/booking/details/{bookingId}
 - Display food & beverage items
 - Display pricing breakdown
 - Display total payable amount
+- Redeem promo code
 
 
 ## 8. Card Payment Screen
